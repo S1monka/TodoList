@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header @click="$router.push('/')">
+    <header @click="goToMainPage">
       <h1><em>Todo List</em></h1>
       <hr />
     </header>
@@ -16,6 +16,13 @@ export default {
     return {
       showModal: false,
     };
+  },
+  methods: {
+    goToMainPage() {
+      if (this.$route.path != "/") {
+        this.$router.push("/");
+      }
+    },
   },
   components: {
     ModalPopup,

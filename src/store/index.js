@@ -64,6 +64,6 @@ export default new Vuex.Store({
   getters: {
     categoryTodos: (state) => (category) =>
       state.todos.filter((todo) => todo.category === category),
-    todoItem: (state) => (id) => state.todos.find((todo) => todo.id === id),
+    todoItem: (state) => (id) => state.todos.find((todo) => todo.id == id),
   },
 });

@@ -29,20 +29,28 @@
 import TodoStatus from "@/components/TodoStatus.vue";
 export default {
   name: "TodoPage",
+  data() {
+    return {
+      todo: {},
+    };
+  },
   components: {
     TodoStatus,
   },
-  computed: {
-    todo() {
-      return this.$store.getters.todoItem(this.$route.params.id);
-    },
-  },
+  // computed: {
+  //   todo() {
+  //     return ;
+  //   },
+  // },
   methods: {
     removeItem(id) {
       const { category } = this.$route.params;
       this.$router.push({ name: "Categories" });
       this.$store.commit("removeTodo", { id, category });
     },
+  },
+  mounted() {
+    this.todo = this.$store.getters.todoItem(this.$route.params.id);
   },
 };
 </script>

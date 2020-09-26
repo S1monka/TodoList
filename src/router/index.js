@@ -19,11 +19,6 @@ const routes = [
     path: "/:category/:id",
     name: "TodoPage",
     component: () => import("../views/TodoPage.vue"),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.todoItem(to.params.id)) {
-        next({ name: "Category", params: { category: to.params.category } });
-      } else next();
-    },
   },
 ];
 

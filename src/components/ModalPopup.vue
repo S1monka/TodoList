@@ -8,6 +8,9 @@
           </div>
 
           <div class="modal-body">
+            <div v-if="showAlert" class="alert">
+              <h3>Fields "Name" and "Category" required</h3>
+            </div>
             <table>
               <tr id="todo-name" class="input-form">
                 <td>
@@ -58,18 +61,28 @@ export default {
       name: "",
       description: "",
       category: "",
+      showAlert: false,
     };
   },
   methods: {
     submitTodo() {
       const { name, description, category } = this;
-      this.$store.commit("addTodo", { name, description, category });
 
-      this.$emit("hide-popup");
+      if (name === "" || category === "") {
+        this.showAlert = true;
 
-      this.name = "";
-      this.description = "";
-      this.category = "";
+        setTimeout(() => {
+          this.showAlert = false;
+        }, 5000);
+      } else {
+        this.$store.commit("addTodo", { name, description, category });
+
+        this.$emit("hide-popup");
+
+        this.name = "";
+        this.description = "";
+        this.category = "";
+      }
     },
   },
 };
@@ -91,6 +104,20 @@ export default {
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
+}
+
+.alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: red;
+  color: white;
+
+  border-radius: 5px;
+  margin: 0 8.5rem;
+
+  height: 3rem;
 }
 
 .modal-body table {
